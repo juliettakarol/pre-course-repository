@@ -1,8 +1,8 @@
  export const data = {
     settings:{
-        columns: 3,
-        rows: 3,
-        pointsWin:10,
+        columns: 4,
+        rows: 4,
+        pointsWin: 10,
         deltaTimeInMs: 100,
         maxMisses:3,
         isMuted: false
@@ -20,7 +20,7 @@
         },
         catch:{
             x: 0,
-            y: 0
+            y: 2
         },
         missed:{
             x: 1,
