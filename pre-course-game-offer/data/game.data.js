@@ -37,3 +37,26 @@
         },
     }
  }
+
+ let subsruber = function(){
+ }
+
+ export function subsrube(newSubsruber){
+    subsruber = newSubsruber
+ }
+
+
+ setInterval(() => {
+    moveRandomPosition()
+ }, 2000);
+
+ function moveRandomPosition (){
+    data.coords.current.x = getRandomInteger(data.settings.columns-1)
+    data.coords.current.y = getRandomInteger(data.settings.rows-1)
+    subsruber()
+ }
+
+ function getRandomInteger(n) {
+    return Math.floor(Math.random() * (n + 1));
+  }
+ 
