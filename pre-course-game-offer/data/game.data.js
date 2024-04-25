@@ -1,3 +1,10 @@
+ export const OFFER_STATUS = {
+    default: 'defailt',
+    miss: 'missed',
+    catch: 'catch'
+ }
+ 
+ 
  export const data = {
     settings:{
         columns: 4,
@@ -7,6 +14,8 @@
         maxMisses:3,
         isMuted: false
     },
+
+    status: OFFER_STATUS.catch,
 
     scores:{
         catchOffer: 1,
