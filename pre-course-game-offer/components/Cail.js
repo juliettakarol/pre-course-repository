@@ -1,4 +1,4 @@
-import { OFFER_STATUS, data } from "../data/game.data.js";
+import { OFFER_STATUS, catchOffer, data } from "../data/game.data.js";
 
 export function Cail(x,y){
     const columnsElement = document.createElement('td');
@@ -6,15 +6,17 @@ export function Cail(x,y){
 
     if(x === data.coords.current.x && y === data.coords.current.y){
         imageElement.src = '../asset/image/simply-offer.png'
+        imageElement.addEventListener('click', catchOffer)
         columnsElement.append(imageElement)
     }
 
-    if(data.status === OFFER_STATUS.catch && x === data.coords.catch.x && y === data.coords.catch.y){
+    if(data.status === OFFER_STATUS.catch && x === data.coords.previous.x && y === data.coords.previous.y){
         imageElement.src = '../asset/image/catch-offer.png'
+        
         columnsElement.append(imageElement)
     }
 
-    if(data.status === OFFER_STATUS.miss && x === data.coords.missed.x && y === data.coords.missed.y){
+    if(data.status === OFFER_STATUS.miss && x === data.coords.previous.x && y === data.coords.previous.y){
         imageElement.src = '../asset/image/missed-offer.png'
         columnsElement.append(imageElement)
     }

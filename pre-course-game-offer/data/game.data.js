@@ -15,7 +15,7 @@
         isMuted: false
     },
 
-    status: OFFER_STATUS.catch,
+    status: OFFER_STATUS.default,
 
     scores:{
         catchOffer: 1,
@@ -27,14 +27,11 @@
             x: 2,
             y: 0
         },
-        catch:{
+        previous:{
             x: 0,
             y: 2
         },
-        missed:{
-            x: 1,
-            y: 1
-        },
+    
     }
  }
 
@@ -48,13 +45,55 @@
 
  setInterval(() => {
     moveRandomPosition()
- }, 2000);
+ }, 3000);
 
  function moveRandomPosition (){
-    data.coords.current.x = getRandomInteger(data.settings.columns-1)
-    data.coords.current.y = getRandomInteger(data.settings.rows-1)
+    let newX = null
+    let newY = null
+
+    do {
+        newX = getRandomInteger(data.settings.columns-1)
+        newY = getRandomInteger(data.settings.rows-1)
+    }
+    while (
+        newX===data.coords.current.x && newY===data.coords.current.y
+    )
+
+    // missOffer()
+
+
+    data.coords.current.x = newX
+    data.coords.current.y = newY
     subsruber()
  }
+
+ function missOffer(){
+    data.status = OFFER_STATUS.miss
+    data.scores.missOffer++
+    data.coords.previous = {...data.coords.current}
+
+    setTimeout(
+        ()=>{
+        data.status = OFFER_STATUS.default
+        subsruber()
+    }  ,200)
+
+ }
+
+ export function catchOffer(){
+    data.status = OFFER_STATUS.catch
+    data.scores.catchOffer++
+    data.coords.previous = {...data.coords.current}
+
+    setTimeout(
+        ()=>{
+        data.status = OFFER_STATUS.default
+        subsruber()
+    },200)
+
+    moveRandomPosition()
+ }
+
 
  function getRandomInteger(n) {
     return Math.floor(Math.random() * (n + 1));
