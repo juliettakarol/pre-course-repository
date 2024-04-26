@@ -43,9 +43,18 @@
  }
 
 
- setInterval(() => {
-    moveRandomPosition()
- }, 3000);
+ let stepInterval 
+
+ function runStepInterval(){
+    stepInterval = setInterval(() => {
+        missOffer()
+        moveRandomPosition(true)
+        subsruber()
+    
+     }, 2000);
+ }
+
+ runStepInterval()
 
  function moveRandomPosition (){
     let newX = null
@@ -59,12 +68,10 @@
         newX===data.coords.current.x && newY===data.coords.current.y
     )
 
-    // missOffer()
-
-
+   
     data.coords.current.x = newX
     data.coords.current.y = newY
-    subsruber()
+    
  }
 
  function missOffer(){
@@ -92,6 +99,9 @@
     },200)
 
     moveRandomPosition()
+    subsruber()
+    clearInterval(stepInterval)
+    runStepInterval()
  }
 
 
