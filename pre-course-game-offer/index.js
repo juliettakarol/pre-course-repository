@@ -1,5 +1,9 @@
 import { Game } from "./components/game.js"
 import { subsrube } from "./data/game.data.js"
+import {Player} from './sound/player.js'
+
+
+Player()
 
 
 subsrube(renderGame)
@@ -11,5 +15,3 @@ function renderGame(){
 }
 
 renderGame()
-
-

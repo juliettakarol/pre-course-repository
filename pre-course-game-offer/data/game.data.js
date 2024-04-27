@@ -35,11 +35,14 @@
     }
  }
 
- let subsruber = function(){
+ let subsrubers = []
+
+ function notify(){
+    subsrubers.forEach(subsruber => subsruber())
  }
 
  export function subsrube(newSubsruber){
-    subsruber = newSubsruber
+    subsrubers.push(newSubsruber)
  }
 
 
@@ -49,7 +52,7 @@
     stepInterval = setInterval(() => {
         missOffer()
         moveRandomPosition(true)
-        subsruber()
+        notify()
     
      }, 2000);
  }
@@ -82,7 +85,7 @@
     setTimeout(
         ()=>{
         data.status = OFFER_STATUS.default
-        subsruber()
+        notify()
     }  ,200)
 
  }
@@ -95,11 +98,11 @@
     setTimeout(
         ()=>{
         data.status = OFFER_STATUS.default
-        subsruber()
+        notify()
     },200)
 
     moveRandomPosition()
-    subsruber()
+    notify()
     clearInterval(stepInterval)
     runStepInterval()
  }
