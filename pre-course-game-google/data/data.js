@@ -28,7 +28,10 @@ export function addEventListener(subscribe){
 }
 
 export function StartGame(){
-    setInterval( changeCoordsGoogle,2000)
+    setInterval( ()=>{
+        changeCoordsGoogle()
+        observer()
+    },2000)
 }
 
 function changeCoordsGoogle(){
@@ -37,13 +40,22 @@ function changeCoordsGoogle(){
      
     _data.heroes.google.x = x
     _data.heroes.google.y = y
-    observer()
+    
 }
 
 
 function getRandomInteger(n) {
     return Math.floor(Math.random() * (n + 1));
       }
+
+
+export function cathGoogle(){
+     _data.caught++
+     changeCoordsGoogle()
+     observer()
+}
+
+
 
 
 //setter

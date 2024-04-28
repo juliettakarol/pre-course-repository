@@ -14,6 +14,7 @@ export function GridGame(){
 
             if(getHeroysGoogle().x === x && getHeroysGoogle().y === y){
                 ceilElement.append(Google())
+                
             }
 
 
