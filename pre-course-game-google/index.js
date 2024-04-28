@@ -1,17 +1,23 @@
 import{InfoPanel} from './components/InfoPanel/infopanel.js'
 import{GridGame} from './components/GridGame/gridgame.js'
-import { StartGame, subribe } from './data/data.js'
+import { StartGame, addEventListener } from './data/data.js'
 
 
-function GameGoogle(){
+function rerender(){
     const rootElement = document.querySelector('#root')
+    rootElement.innerHTML = ''
 
     rootElement.append(InfoPanel(),GridGame())
 
     return rootElement
 }
 
-GameGoogle()
-subribe(GameGoogle)
+rerender()
+
+
 StartGame()
+
+document.addEventListener('click', ()=>{})
+
+addEventListener(rerender)
 

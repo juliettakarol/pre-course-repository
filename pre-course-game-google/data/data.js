@@ -20,12 +20,11 @@ const _data = {
 }
 
 
-let subribes = function (){
-
+let observer = function (){
 }
 
-export function subribe(anySu){
-    subribes = anySu
+export function addEventListener(subscribe){
+    observer = subscribe
 }
 
 export function StartGame(){
@@ -33,13 +32,12 @@ export function StartGame(){
 }
 
 function changeCoordsGoogle(){
-    new x = getRandomInteger(_data.settings.gridSizen.x)
-    new y = getRandomInteger(_data.settings.gridSizen.x)
+    let x = getRandomInteger(_data.settings.gridSize.x-1)
+    let y = getRandomInteger(_data.settings.gridSize.y-1)
      
-    
-    
     _data.heroes.google.x = x
     _data.heroes.google.y = y
+    observer()
 }
 
 
@@ -68,6 +66,12 @@ export function getHeroysGoogle(){
     return {..._data.heroes.google}
     }
 
-
+/**
+ * 
+ * @returns количество баллов
+ */
+export function getCachCount(){
+    return _data.caught
+}
 
 

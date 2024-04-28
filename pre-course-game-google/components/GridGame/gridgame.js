@@ -10,7 +10,7 @@ export function GridGame(){
 
         for (let x = 0; x < gridSize.x; x++) {
             const ceilElement = document.createElement('td');
-            ceilElement.append(`${x},${y}`)
+            // ceilElement.append(`${x},${y}`)
 
             if(getHeroysGoogle().x === x && getHeroysGoogle().y === y){
                 ceilElement.append(Google())
