@@ -7,6 +7,7 @@ const _data = {
         },
     },
     caught: 0,
+    miss: 0,
     timeGame: new Date(),
     heroes:{
         google: {
@@ -20,6 +21,8 @@ const _data = {
 }
 
 
+
+
 let observer = function (){
 }
 
@@ -27,11 +30,21 @@ export function addEventListener(subscribe){
     observer = subscribe
 }
 
-export function StartGame(){
-    setInterval( ()=>{
+let jumpInterval
+
+function runJumpInterval(){
+    jumpInterval = setInterval( ()=>{
         changeCoordsGoogle()
         observer()
     },2000)
+}
+
+function stopJumpInterval(){
+    clearInterval(jumpInterval)
+}
+
+export function StartGame(){
+    runJumpInterval()
 }
 
 function changeCoordsGoogle(){
@@ -52,6 +65,8 @@ function getRandomInteger(n) {
 export function cathGoogle(){
      _data.caught++
      changeCoordsGoogle()
+     stopJumpInterval()
+     runJumpInterval()
      observer()
 }
 
@@ -85,5 +100,4 @@ export function getHeroysGoogle(){
 export function getCachCount(){
     return _data.caught
 }
-
 
