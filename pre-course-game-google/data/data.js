@@ -35,6 +35,7 @@ let jumpInterval
 function runJumpInterval(){
     jumpInterval = setInterval( ()=>{
         changeCoordsGoogle()
+        _data.miss++
         observer()
     },2000)
 }
@@ -99,5 +100,10 @@ export function getHeroysGoogle(){
  */
 export function getCachCount(){
     return _data.caught
+}
+
+
+export function getMissCount(){
+    return _data.miss
 }
 
