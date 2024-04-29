@@ -1,3 +1,11 @@
+export const STATES = {
+    SETTINS: 'settings',
+    IN_PROGRESS: 'in_progress',
+    WIN: 'win',
+    LOSE: 'lose',
+}
+
+
 
 const _data = {
     settings: {
@@ -5,9 +13,12 @@ const _data = {
             x: 3,
             y: 3,
         },
+        pointsToWin:5,
+        pointsToLose:5,
     },
     caught: 0,
     miss: 0,
+    game_status: 'settings',
     timeGame: new Date(),
     heroes:{
         google: {
@@ -30,12 +41,26 @@ export function addEventListener(subscribe){
     observer = subscribe
 }
 
+
+export function playAgain(){
+    
+    _data.caught = 0
+    _data.miss = 0 
+    _data.game_status = STATES.SETTINS
+    observer()
+}
+
 let jumpInterval
 
 function runJumpInterval(){
     jumpInterval = setInterval( ()=>{
         changeCoordsGoogle()
         _data.miss++
+        if(_data.settings.pointsToLose === _data.miss){
+            stopJumpInterval()
+            _data.game_status = STATES.LOSE
+         }
+        
         observer()
     },2000)
 }
@@ -45,15 +70,24 @@ function stopJumpInterval(){
 }
 
 export function StartGame(){
+    _data.game_status = STATES.IN_PROGRESS
     runJumpInterval()
+    observer()
 }
 
 function changeCoordsGoogle(){
-    let x = getRandomInteger(_data.settings.gridSize.x-1)
-    let y = getRandomInteger(_data.settings.gridSize.y-1)
-     
-    _data.heroes.google.x = x
-    _data.heroes.google.y = y
+    let newX
+    let newY
+    do {
+        newX = getRandomInteger(_data.settings.gridSize.x-1)
+        newY = getRandomInteger(_data.settings.gridSize.y-1)
+
+    }
+    while (
+        newX === _data.heroes.google.x && newY === _data.heroes.google.y
+    )
+    _data.heroes.google.x = newX
+    _data.heroes.google.y = newY
     
 }
 
@@ -64,11 +98,21 @@ function getRandomInteger(n) {
 
 
 export function cathGoogle(){
+    stopJumpInterval()
+    if(_data.settings.pointsToWin === _data.caught){
+        return
+    }
      _data.caught++
-     changeCoordsGoogle()
-     stopJumpInterval()
-     runJumpInterval()
-     observer()
+     
+
+     if(_data.settings.pointsToWin === _data.caught){
+        _data.game_status = STATES.WIN
+     } else {
+        changeCoordsGoogle()
+        runJumpInterval()
+       
+     } observer()
+     
 }
 
 
@@ -107,3 +151,6 @@ export function getMissCount(){
     return _data.miss
 }
 
+export function getState(){
+    return _data.game_status
+}
