@@ -3,6 +3,7 @@ import{GridGame} from './components/GridGame/gridgame.js'
 import {STATES, StartGame, addEventListener, getState} from './data/data.js'
 import { Settings } from './components/Settings/settingscomponents.js'
 import { Win } from './components/Win/wincomponents.js'
+import { Lose } from './components/Lose/losecomponents.js'
 
 
 function rerender(){
@@ -23,6 +24,10 @@ switch(gameState){
     rootElement.append(Win());
     break;
 
+    case STATES.LOSE:
+    rootElement.append(Lose());
+    break;
+
     default: {
         throw new Error('Not supported state');
     }   
@@ -34,8 +39,6 @@ switch(gameState){
 }
 
 rerender()
-
-StartGame()
 
 addEventListener(rerender)
 
