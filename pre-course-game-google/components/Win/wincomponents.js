@@ -22,8 +22,5 @@ export function Win(){
 
     winElement.append(winRezult, winRezultCatch, winRezultMiss, playAgainButton)
 
-
-
-
     return winElement
 }
