@@ -93,7 +93,9 @@ function changeCoordsGoogle(){
 
     }
     while (
-        newX === _data.heroes.google.x && newY === _data.heroes.google.y
+        (newX === _data.heroes.google.x && newY === _data.heroes.google.y) ||
+        (newX === _data.heroes.player1.x && newY === _data.heroes.player1.y) ||
+        (newX === _data.heroes.player2.x && newY === _data.heroes.player2.y)
     )
     _data.heroes.google.x = newX
     _data.heroes.google.y = newY
@@ -106,7 +108,7 @@ function getRandomInteger(n) {
       }
 
 
-export function cathGoogle(){
+function cathGoogle(){
     stopJumpInterval()
     if(_data.settings.pointsToWin === _data.caught){
         return
@@ -145,6 +147,14 @@ export function getGridSize(){
 
 export function getHeroysGoogle(){
     return {..._data.heroes.google}
+    }
+
+export function getHeroysPlayer1(){
+    return {..._data.heroes.player1}
+    }
+
+export function getHeroysPlayer2(){
+    return {..._data.heroes.player2}
     }
 
 /**
