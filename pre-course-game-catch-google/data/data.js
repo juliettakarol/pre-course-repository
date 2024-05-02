@@ -5,7 +5,12 @@ export const STATES = {
     LOSE: 'lose',
 }
 
-
+const GAME_DIRECTION = {
+    UP: 'up',
+    DOWN: 'down',
+    LEFT: 'left',
+    RIGHT: 'right',
+}
 
 const _data = {
     settings: {
@@ -13,8 +18,8 @@ const _data = {
             x: 3,
             y: 3,
         },
-        pointsToWin:5,
-        pointsToLose:5,
+        pointsToWin:10,
+        pointsToLose:10,
     },
     caught: 0,
     miss: 0,
@@ -39,6 +44,7 @@ const _data = {
 
 
 
+
 let observer = function (){
 }
 
@@ -46,14 +52,6 @@ export function addEventListener(subscribe){
     observer = subscribe
 }
 
-
-export function playAgain(){
-    
-    _data.caught = 0
-    _data.miss = 0 
-    _data.game_status = STATES.SETTINS
-    observer()
-}
 
 let jumpInterval
 
@@ -74,16 +72,6 @@ function stopJumpInterval(){
     clearInterval(jumpInterval)
 }
 
-export function StartGame(){
-    if( _data.game_status !== STATES.SETTINS){
-        throw new Error('Game cannot be started from state' +_data.game_status)
-    }
-
-    _data.game_status = STATES.IN_PROGRESS
-    runJumpInterval()
-    observer()
-}
-
 function changeCoordsGoogle(){
     let newX
     let newY
@@ -101,7 +89,6 @@ function changeCoordsGoogle(){
     _data.heroes.google.y = newY
     
 }
-
 
 function getRandomInteger(n) {
     return Math.floor(Math.random() * (n + 1));
@@ -125,6 +112,43 @@ function cathGoogle(){
      } observer()
      
 }
+
+
+export function playAgain(){
+    
+    _data.caught = 0
+    _data.miss = 0 
+    _data.game_status = STATES.SETTINS
+    observer()
+}
+
+
+export function StartGame(){
+    if( _data.game_status !== STATES.SETTINS){
+        throw new Error('Game cannot be started from state' +_data.game_status)
+    }
+
+    _data.game_status = STATES.IN_PROGRESS
+    runJumpInterval()
+    observer()
+}
+
+export function validationPlayerNumber(playerNumber){
+    if (![1,2].some(number=> number===playerNumber)){
+        throw new Error('Incorrect player number')
+    }
+}
+
+export function movePlayer(playerNumber, direction){
+    validationPlayerNumber(playerNumber)
+    
+    _data.heroes[`player${playerNumber}`].x++
+    observer()
+}
+
+
+
+
 
 
 
@@ -164,7 +188,6 @@ export function getHeroysPlayer2(){
 export function getCachCount(){
     return _data.caught
 }
-
 
 export function getMissCount(){
     return _data.miss

@@ -1,9 +1,8 @@
+import { validationPlayerNumber } from "../../../data/data.js"
 
 
 export function Player(playerNumber){
-if (![1,2].some(number=> number===playerNumber)){
-    throw new Error('Incorrect player number')
-}
+    validationPlayerNumber(playerNumber)
 
     const playerElement = document.createElement('img')
     playerElement.src = `../../../asset/img/player${playerNumber}.png`

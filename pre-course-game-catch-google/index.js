@@ -1,6 +1,6 @@
 import{InfoPanel} from './components/InfoPanel/infopanel.js'
 import{GridGame} from './components/GridGame/gridgame.js'
-import {STATES, StartGame, addEventListener, getState} from './data/data.js'
+import {STATES, StartGame, addEventListener, getState, movePlayer} from './data/data.js'
 import { Settings } from './components/Settings/settingscomponents.js'
 import { Win } from './components/Win/wincomponents.js'
 import { Lose } from './components/Lose/losecomponents.js'
@@ -9,6 +9,7 @@ import { Lose } from './components/Lose/losecomponents.js'
 function rerender(){
     const rootElement = document.querySelector('#root')
     rootElement.innerHTML = ''
+
     const gameState = getState()
 
 switch(gameState){
@@ -32,10 +33,7 @@ switch(gameState){
         throw new Error('Not supported state');
     }   
   
-}
-
-    
-    
+}      
 }
 
 rerender()
