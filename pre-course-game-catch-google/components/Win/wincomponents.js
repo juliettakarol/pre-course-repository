@@ -7,11 +7,15 @@ export function Win(){
     const winRezult = document.createElement('p')
     winRezult.append('YOU WIN')
 
-    const winRezultCatch = document.createElement('p')
-    winRezultCatch.append(`Catch: ${getCachCount()}`)
+    const winRezultCatchPlayer1 = document.createElement('p')
+    winRezultCatchPlayer1.append(`Catch Player1: ${getCachCount().player1}`)
+
+    const winRezultCatchPlayer2 = document.createElement('p')
+    winRezultCatchPlayer2.append(`Catch Player2: ${getCachCount().player2}`)
+
 
     const winRezultMiss = document.createElement('p')
-    winRezultMiss.append(`Catch: ${getMissCount()}`)
+    winRezultMiss.append(`Miss: ${getMissCount()}`)
 
 
     const playAgainButton = document.createElement('button')
@@ -20,7 +24,7 @@ export function Win(){
         playAgain()
     })
 
-    winElement.append(winRezult, winRezultCatch, winRezultMiss, playAgainButton)
+    winElement.append(winRezult, winRezultCatchPlayer1, winRezultCatchPlayer2, winRezultMiss, playAgainButton)
 
     return winElement
 }

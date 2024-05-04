@@ -7,7 +7,7 @@ export function Lose(){
     loseRezult.append('YOU LOSE')
 
     const loseRezultCatch = document.createElement('p')
-    loseRezultCatch.append(`Catch: ${getCachCount()}`)
+    loseRezultCatch.append(`Catch Player1: ${getCachCount().player1}, Player2${getCachCount().player2}`)
 
     const loseRezultMiss = document.createElement('p')
     loseRezultMiss.append(`Catch: ${getMissCount()}`)

@@ -22,7 +22,10 @@ const _data = {
         pointsToLose:10,
         jumpInterval: 4000
     },
-    caught: 0,
+    caught: {
+        player1: 0,
+        player2: 0
+    },
     miss: 0,
     game_status: 'settings',
     timeGame: new Date(),
@@ -96,15 +99,13 @@ function getRandomInteger(n) {
       }
 
 
-function cathGoogle(){
+function cathGoogle(playerNumber){
     stopJumpInterval()
-    if(_data.settings.pointsToWin === _data.caught){
-        return
-    }
-     _data.caught++
+    
+     _data.caught[`player${playerNumber}`]++
      
 
-     if(_data.settings.pointsToWin === _data.caught){
+     if(_data.settings.pointsToWin === _data.caught[`player${playerNumber}`]){
         _data.game_status = STATES.WIN
      } else {
         changeCoordsGoogle()
@@ -112,6 +113,26 @@ function cathGoogle(){
        
      } observer()
      
+}
+
+function _checkCoordsIsValid(coords){
+    const coorectX = coords.x >= 0 && coords.x <= _data.settings.gridSize.x-1
+    const coorectY = coords.x >= 0 && coords.x <= _data.settings.gridSize.x-1
+
+    return coorectX && coorectY
+
+}
+
+function _matchCoordsOtherPlayer(coords){
+    const player1IsInThisCeil = coords.x === _data.heroes.player1.x && coords.y === _data.heroes.player1.y
+    const player2IsInThisCeil = coords.x === _data.heroes.player2.x && coords.y === _data.heroes.player2.y
+
+    return player1IsInThisCeil || player2IsInThisCeil
+}
+
+function _matchCoordsGoogle(coords){
+    const googleIsInThisCeil = coords.x === _data.heroes.google.x && coords.y === _data.heroes.google.y
+    return googleIsInThisCeil
 }
 
 
@@ -142,8 +163,38 @@ export function validationPlayerNumber(playerNumber){
 
 export function movePlayer(playerNumber, direction){
     validationPlayerNumber(playerNumber)
+
+    const newCoords = {..._data.heroes[`player${playerNumber}`]}
     
-    _data.heroes[`player${playerNumber}`].x++
+
+    switch (direction) {
+        case GAME_DIRECTION.DOWN:
+            newCoords.y++
+        break;
+        case GAME_DIRECTION.UP:
+            newCoords.y--
+        break;
+        case GAME_DIRECTION.RIGHT:
+            newCoords.x++
+        break;
+        case GAME_DIRECTION.LEFT:
+            newCoords.x--
+        break;
+    }
+    
+    const isValid = _checkCoordsIsValid(newCoords)
+    if(!isValid) return
+
+    const isMatchOtherPlayer = _matchCoordsOtherPlayer(newCoords)
+    if(isMatchOtherPlayer) return
+
+    const isMatchGoogle = _matchCoordsGoogle(newCoords)
+    if(isMatchGoogle){
+        cathGoogle(playerNumber)
+    }
+
+    _data.heroes[`player${playerNumber}`] = newCoords
+
     observer()
 }
 

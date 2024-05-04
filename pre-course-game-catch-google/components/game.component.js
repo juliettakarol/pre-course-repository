@@ -8,7 +8,7 @@ import { Lose } from '../components/Lose/losecomponents.js'
 
 document.addEventListener('keyup', (event)=>{
     switch(event.code){
-        case 'Arrowleft':
+        case 'ArrowLeft':
             movePlayer(1, GAME_DIRECTION.LEFT)
             break;
         case 'ArrowRight':
