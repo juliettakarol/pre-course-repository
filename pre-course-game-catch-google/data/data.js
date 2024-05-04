@@ -5,7 +5,7 @@ export const STATES = {
     LOSE: 'lose',
 }
 
-const GAME_DIRECTION = {
+export const GAME_DIRECTION = {
     UP: 'up',
     DOWN: 'down',
     LEFT: 'left',
@@ -20,6 +20,7 @@ const _data = {
         },
         pointsToWin:10,
         pointsToLose:10,
+        jumpInterval: 4000
     },
     caught: 0,
     miss: 0,
@@ -65,7 +66,7 @@ function runJumpInterval(){
          }
         
         observer()
-    },2000)
+    }, _data.settings.jumpInterval)
 }
 
 function stopJumpInterval(){
