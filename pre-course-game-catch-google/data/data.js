@@ -15,8 +15,8 @@ export const GAME_DIRECTION = {
 const _data = {
     settings: {
         gridSize:{
-            x: 3,
-            y: 3,
+            x: 5,
+            y: 5,
         },
         pointsToWin:10,
         pointsToLose:10,
@@ -117,7 +117,7 @@ function cathGoogle(playerNumber){
 
 function _checkCoordsIsValid(coords){
     const coorectX = coords.x >= 0 && coords.x <= _data.settings.gridSize.x-1
-    const coorectY = coords.x >= 0 && coords.x <= _data.settings.gridSize.x-1
+    const coorectY = coords.y >= 0 && coords.y <= _data.settings.gridSize.y-1
 
     return coorectX && coorectY
 
@@ -163,6 +163,10 @@ export function validationPlayerNumber(playerNumber){
 
 export function movePlayer(playerNumber, direction){
     validationPlayerNumber(playerNumber)
+
+    if(_data.game_status !== STATES.IN_PROGRESS){
+        return
+    }
 
     const newCoords = {..._data.heroes[`player${playerNumber}`]}
     

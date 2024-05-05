@@ -20,6 +20,20 @@ document.addEventListener('keyup', (event)=>{
         case 'ArrowDown':
             movePlayer(1, GAME_DIRECTION.DOWN)
         break;
+
+
+        case 'KeyA':
+            movePlayer(2, GAME_DIRECTION.LEFT)
+            break;
+        case 'KeyD':
+            movePlayer(2, GAME_DIRECTION.RIGHT)
+            break;
+        case 'KeyW':
+            movePlayer(2, GAME_DIRECTION.UP)
+        break;
+        case 'KeyS':
+            movePlayer(2, GAME_DIRECTION.DOWN)
+        break;
     }
 })
 
