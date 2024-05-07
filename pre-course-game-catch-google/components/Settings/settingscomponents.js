@@ -1,31 +1,13 @@
-import { StartGame } from "../../data/data.js"
+import { StartGame, setGridSize } from "../../data/data.js"
 
 export function Settings(){
     const settingElement = document.createElement('div')
-    const settingElements = document.createElement('p')
-    const settingElementss = document.createElement('p')
-
-
+    const settingElement1 = document.createElement('p')
+    const settingElement2 = document.createElement('p')
     
-
-
-
-    // function changeData() {
-        
-    //     var selectedValue = selectGridSizeElement.value;
-        
-      
-    //     if (selectedValue === "4x4") {
-    //       ge.innerHTML = "Данные для опции 1";
-    //     } else if (selectedValue === "option2") {
-    //       dataContainer.innerHTML = "Данные для опции 2";
-        
-    //   }}
-
-    
-    settingElementss.append(selectGridSize(), selectPointsToWin(), selectPointsToLose())
-    settingElements.append(startButton())
-    settingElement.append(settingElementss,settingElements)
+    settingElement1.append(selectGridSize(), selectPointsToWin(), selectPointsToLose())
+    settingElement2.append(startButton())
+    settingElement.append(settingElement1,settingElement2)
     
 
     return settingElement
@@ -40,9 +22,34 @@ function selectGridSize(){
 
     const optionSelectButton2 = document.createElement('option')
     optionSelectButton2.append('5x5')
+
+    const optionSelectButton3 = document.createElement('option')
+    optionSelectButton3.append('6x6')
     
-    selectGridSizeElement.append(optionSelectButton1, optionSelectButton2)
+    selectGridSizeElement.append(optionSelectButton1, optionSelectButton2, optionSelectButton3)
+
+    selectGridSizeElement.addEventListener('change', ()=>{
+        settingSelectGridSize(selectGridSize().value)}
+    )
+   
     return selectGridSizeElement
+}
+
+
+
+
+function settingSelectGridSize(valueGridSize){
+    const element = valueGridSize
+    if(element==='4x4'){
+        setGridSize(4,4)
+    }
+    if(element==='5x5'){
+        setGridSize(5,5)
+    }
+    if(element==='6x6'){
+        setGridSize(6,6)
+    }
+
 }
 
 function selectPointsToWin(){

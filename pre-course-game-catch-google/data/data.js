@@ -12,6 +12,26 @@ export const GAME_DIRECTION = {
     RIGHT: 'right',
 }
 
+export const OPTIONS = {
+    gridSize:[   
+        {x: 3,y: 3,},
+        {x: 4,y: 4,},
+        {x: 5,y: 5,},
+    ],
+    pointsToWin:[
+        10,
+        20,
+        30
+    ],
+    maxMissedOption:[
+        10,
+        20,
+        30
+
+    ],
+}
+
+
 const _data = {
     settings: {
         gridSize:{
