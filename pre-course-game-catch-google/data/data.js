@@ -17,6 +17,8 @@ export const OPTIONS = {
         {x: 3,y: 3,},
         {x: 4,y: 4,},
         {x: 5,y: 5,},
+        {x: 6,y: 6,},
+        {x: 7,y: 7,},
     ],
     pointsToWin:[
         10,
@@ -27,7 +29,6 @@ export const OPTIONS = {
         10,
         20,
         30
-
     ],
 }
 
@@ -35,8 +36,8 @@ export const OPTIONS = {
 const _data = {
     settings: {
         gridSize:{
-            x: 5,
-            y: 5,
+            x: 3,
+            y: 3,
         },
         pointsToWin:10,
         pointsToLose:10,
@@ -235,9 +236,14 @@ export function setGridSize(anyX, anyY){
     if (anyX<1) throw new Error ('Incorrect x')
     if (anyY<1) throw new Error ('Incorrect y')
     _data.settings.gridSize.x = anyX
-    _data.settings.gridSize.y = anyY
-  
+    _data.settings.gridSize.y = anyY 
 }
+
+export function setPointsToWin (anyPoints){
+_data.settings.pointsToWin = anyPoints}
+
+export function setPointsToLose(anyPoints){
+_data.settings.pointsToLose = anyPoints}
  
 
 //getter
