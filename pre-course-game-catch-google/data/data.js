@@ -1,3 +1,12 @@
+export const EVENTS = {
+    GOOGLE_JUMP:'GOOGLE_JUMP',
+    PLAYER1_MOVE:'PLAYER1_MOVE',
+    PLAYER2_MOVE:'PLAYER2_MOVE',
+    STATES_CHANGE:'STATES_CHANGE',
+    CATCH_CHANGE:'CATCH_CHANGE',
+}
+
+
 export const STATES = {
     SETTINS: 'settings',
     IN_PROGRESS: 'in_progress',
@@ -68,26 +77,22 @@ const _data = {
 
 
 
-
-
-// let observer = function (){
-// }
-
 let _subscribers = []
-
-// export function addEventListener(subscribe){
-//     observer = subscribe  
-    
-// }
 
 export function subcribe(subscriber){
     _subscribers.push(subscriber)  
 }
 
-function _notify(){
+export function unsubcribe(subscriber){
+    _subscribers = _subscribers.filter(el => el !== subscriber)
+}
+
+
+function _notify(nameEvent){
     _subscribers.forEach((el) => {
         try {
-        el()  
+            const event = {name: nameEvent}
+        el(event) 
         }   
         catch(error){
             console.error(error)
@@ -101,14 +106,17 @@ let jumpInterval
 function runJumpInterval(){
     jumpInterval = setInterval( ()=>{
         changeCoordsGoogle()
+        _notify(EVENTS.GOOGLE_JUMP)
         _data.miss++
+        _notify(EVENTS.CATCH_CHANGE)
         if(_data.settings.pointsToLose === _data.miss){
             stopJumpInterval()
             _data.game_status = STATES.LOSE
+            _notify(EVENTS.STATES_CHANGE)
          }
         
-        //observer()
-        _notify()
+        
+        
     }, _data.settings.jumpInterval)
 }
 
@@ -143,16 +151,19 @@ function cathGoogle(playerNumber){
     stopJumpInterval()
     
      _data.caught[`player${playerNumber}`]++
+     _notify(EVENTS.CATCH_CHANGE)
      
 
      if(_data.settings.pointsToWin === _data.caught[`player${playerNumber}`]){
         _data.game_status = STATES.WIN
+        _notify(EVENTS.STATES_CHANGE)
      } else {
         changeCoordsGoogle()
+        _notify(EVENTS.GOOGLE_JUMP)
         runJumpInterval()
        
-     } //observer()
-     _notify()
+     } 
+     
      
 }
 
@@ -181,9 +192,10 @@ export function playAgain(){
     
     _data.caught = 0
     _data.miss = 0 
+    _notify(EVENTS.CATCH_CHANGE)
+
     _data.game_status = STATES.SETTINS
-    //observer()
-    _notify()
+    _notify(EVENTS.STATES_CHANGE)
 }
 
 
@@ -193,9 +205,11 @@ export function StartGame(){
     }
 
     _data.game_status = STATES.IN_PROGRESS
+    _notify(EVENTS.STATES_CHANGE)
     runJumpInterval()
-    //observer()
-    _notify()
+    
+    
+    
 }
 
 export function validationPlayerNumber(playerNumber){
@@ -242,8 +256,7 @@ export function movePlayer(playerNumber, direction){
 
     _data.heroes[`player${playerNumber}`] = newCoords
 
-    //observer()
-    _notify()
+    _notify(EVENTS[`PLAYER${playerNumber}_MOVE`])
 }
 
 

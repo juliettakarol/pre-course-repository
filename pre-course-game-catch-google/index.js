@@ -1,17 +1,23 @@
-import { subcribe} from './data/data.js'
+import { subcribe, unsubcribe} from './data/data.js'
 import { Game } from './components/game.component.js'
 
 
-function rerender(){
+function rerender(e){
     const rootElement = document.querySelector('#root')
     rootElement.innerHTML = ''
     const game = Game()
     rootElement.append(game)
 }
     
-rerender()
+rerender({name: undefined})
 
 subcribe(rerender)
 
-subcribe(()=>{console.log('dddd')})
+const subscriber = (e)=>{
+    console.log(e)
+    
+}
+
+subcribe(subscriber)
+
 
