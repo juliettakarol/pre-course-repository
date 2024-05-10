@@ -6,14 +6,11 @@ export function Settings(){
 
     const containerSelector = document.createElement('div')
 
-    const selectGridSize = selectGridSizeFunction(OPTIONS.gridSize)
+    const selectGridSize = selectGridSizeFunction(OPTIONS.gridSize, 'Grid size')
 
-       selectGridSize.addEventListener('change', ()=>{
-        setGridSize(Number(selectGridSize.value.split('x')[0]), Number(selectGridSize.value.split('x')[1]))})
-    
     containerSelector.append(selectGridSize)
 
-    
+
 
 
     const startButtonElement = document.createElement('button')
@@ -32,7 +29,13 @@ export function Settings(){
 
 
 
-function selectGridSizeFunction(array){
+function selectGridSizeFunction(array, Title){
+    const container = document.createElement('div')
+
+    const containerTitle = document.createElement('div')
+    containerTitle.append(Title)
+
+
     const selectGridSizeElement = document.createElement('select')
 
     for (let i = 0; i < array.length; i++) {
@@ -40,7 +43,14 @@ function selectGridSizeFunction(array){
         optionElement.append(`${array[i].x} x ${array[i].y}`)
         selectGridSizeElement.append(optionElement)
     }
-    return selectGridSizeElement
+
+    selectGridSizeElement.addEventListener('change', ()=>{
+        setGridSize(Number(selectGridSizeElement.value.split('x')[0]), Number(selectGridSizeElement.value.split('x')[1]))})
+
+    container.append(containerTitle, selectGridSizeElement)
+
+
+    return container
 }
 
 

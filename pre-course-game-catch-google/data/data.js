@@ -70,13 +70,31 @@ const _data = {
 
 
 
-let observer = function (){
+// let observer = function (){
+// }
+
+let _subscribers = []
+
+// export function addEventListener(subscribe){
+//     observer = subscribe  
+    
+// }
+
+export function subcribe(subscriber){
+    _subscribers.push(subscriber)  
 }
 
-export function addEventListener(subscribe){
-    observer = subscribe
-}
+function _notify(){
+    _subscribers.forEach((el) => {
+        try {
+        el()  
+        }   
+        catch(error){
+            console.error(error)
+        }
+    })
 
+}
 
 let jumpInterval
 
@@ -89,7 +107,8 @@ function runJumpInterval(){
             _data.game_status = STATES.LOSE
          }
         
-        observer()
+        //observer()
+        _notify()
     }, _data.settings.jumpInterval)
 }
 
@@ -132,7 +151,8 @@ function cathGoogle(playerNumber){
         changeCoordsGoogle()
         runJumpInterval()
        
-     } observer()
+     } //observer()
+     _notify()
      
 }
 
@@ -162,7 +182,8 @@ export function playAgain(){
     _data.caught = 0
     _data.miss = 0 
     _data.game_status = STATES.SETTINS
-    observer()
+    //observer()
+    _notify()
 }
 
 
@@ -173,7 +194,8 @@ export function StartGame(){
 
     _data.game_status = STATES.IN_PROGRESS
     runJumpInterval()
-    observer()
+    //observer()
+    _notify()
 }
 
 export function validationPlayerNumber(playerNumber){
@@ -220,7 +242,8 @@ export function movePlayer(playerNumber, direction){
 
     _data.heroes[`player${playerNumber}`] = newCoords
 
-    observer()
+    //observer()
+    _notify()
 }
 
 

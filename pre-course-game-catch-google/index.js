@@ -1,4 +1,4 @@
-import {addEventListener} from './data/data.js'
+import { subcribe} from './data/data.js'
 import { Game } from './components/game.component.js'
 
 
@@ -11,5 +11,7 @@ function rerender(){
     
 rerender()
 
-addEventListener(rerender)
+subcribe(rerender)
+
+subcribe(()=>{console.log('dddd')})
 
