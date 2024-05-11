@@ -1,15 +1,18 @@
-import { subcribe, unsubcribe} from './data/data.js'
+import { EVENTS, subcribe} from './data/data.js'
 import { Game } from './components/game.component.js'
 
 
 function rerender(e){
-    const rootElement = document.querySelector('#root')
-    rootElement.innerHTML = ''
-    const game = Game()
-    rootElement.append(game)
-}
+    if(e.name === EVENTS.STATES_CHANGE){
+        const rootElement = document.querySelector('#root')
+        rootElement.innerHTML = ''
+        const game = Game()
+        rootElement.append(game)
+    }
+
+    }
     
-rerender({name: undefined})
+rerender({name: EVENTS.STATES_CHANGE})
 
 subcribe(rerender)
 
