@@ -33,73 +33,48 @@ export function Cell(x, y) {
     }
 
     subcribe((e) => {
-
-        const transition = {
-            [EVENTS.GOOGLE_JUMP]: () => {
-                const innerTransition = {
-                    [CELL_STATUS.GOOGLE]: () => {
+        const transitions = {
+            [EVENTS.GOOGLE_JUMP]: {
+                [CELL_STATUS.GOOGLE]: rerenderCell,
+                [CELL_STATUS.EMPTY]: () => {
+                    if (getHeroysGoogle().x === x && getHeroysGoogle().y === y) {
                         rerenderCell()
-                    },
-                    [CELL_STATUS.EMPTY]: () => {
-                        if (getHeroysGoogle().x === x && getHeroysGoogle().y === y) {
-                            rerenderCell()
-                        }
-
-                    },
-                }
-                const transition = innerTransition[state.prevState]
-                if (transition) transition()
+                    }
+                },
             },
-            [EVENTS.PLAYER1_MOVE]: () => {
-                const innerTransition = {
-                    [CELL_STATUS.PLAYER1]: () => {
+            [EVENTS.PLAYER1_MOVE]: {
+                [CELL_STATUS.PLAYER1]: rerenderCell,
+                [CELL_STATUS.GOOGLE]: () => {
+                    if (getHeroysPlayer1().x === x && getHeroysPlayer1().y === y) {
                         rerenderCell()
-                    },
-                    [CELL_STATUS.GOOGLE]: () => {
-                        if (getHeroysPlayer1().x === x && getHeroysPlayer1().y === y) {
-                            rerenderCell()
-                        }
-
-                    },
-                    [CELL_STATUS.EMPTY]: () => {
-                        if (getHeroysPlayer1().x === x && getHeroysPlayer1().y === y) {
-                            rerenderCell()
-                        }
-
-                    },
-                }
-                const transition = innerTransition[state.prevState]
-                if (transition) transition()
-                
-            },
-            [EVENTS.PLAYER2_MOVE]: () => {
-                const innerTransition = {
-                    [CELL_STATUS.PLAYER2]: () => {
+                    }
+                },
+                [CELL_STATUS.EMPTY]: () => {
+                    if (getHeroysPlayer1().x === x && getHeroysPlayer1().y === y) {
                         rerenderCell()
-                    },
-                    [CELL_STATUS.GOOGLE]: () => {
-                        if (getHeroysPlayer2().x === x && getHeroysPlayer2().y === y) {
-                            rerenderCell()
-                        }
-
-                    },
-                    [CELL_STATUS.EMPTY]: () => {
-                        if (getHeroysPlayer2().x === x && getHeroysPlayer2().y === y) {
-                            rerenderCell()
-                        }
-
-                    },
-                }
-                const transition = innerTransition[state.prevState]
-                if (transition) transition()
-                
+                    }
+                },
             },
-          
+            [EVENTS.PLAYER2_MOVE]: {
+                [CELL_STATUS.PLAYER2]: rerenderCell,
+                [CELL_STATUS.GOOGLE]: () => {
+                    if (getHeroysPlayer2().x === x && getHeroysPlayer2().y === y) {
+                        rerenderCell()
+                    }
+                },
+                [CELL_STATUS.EMPTY]: () => {
+                    if (getHeroysPlayer2().x === x && getHeroysPlayer2().y === y) {
+                        rerenderCell()
+                    }
+                },
+            },
         }
 
-        const handler = transition[e.name]
-        if (handler) handler()
-
+        const inerTransitions = transitions[e.name]
+        if (inerTransitions) {
+            const transition =  inerTransitions[state.prevState]
+            if(transition) transition()
+        }
     })
 
     const ceilElement = document.createElement('td');

@@ -190,7 +190,8 @@ function _matchCoordsGoogle(coords){
 
 export function playAgain(){
     
-    _data.caught = 0
+    _data.caught.player1 = 0
+    _data.caught.player2 = 0
     _data.miss = 0 
     _notify(EVENTS.CATCH_CHANGE)
 
