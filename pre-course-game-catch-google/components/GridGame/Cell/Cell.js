@@ -81,5 +81,4 @@ export function Cell(x, y) {
     rerenderCell()
 
     return ceilElement;
-
 }
