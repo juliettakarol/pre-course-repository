@@ -87,8 +87,6 @@ export function unsubcribe(subscriber){
     _subscribers = _subscribers.filter(el => el !== subscriber)
 }
 
-// kkkk
-
 function _notify(nameEvent){
     _subscribers.forEach((el) => {
         try {

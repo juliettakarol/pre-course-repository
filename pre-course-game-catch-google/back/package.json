@@ -1,0 +1,19 @@
+{
+  "name": "google-back",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "super game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "game",
+    "google"
+  ],
+  "author": "julietta",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
