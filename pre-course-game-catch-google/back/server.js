@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 
 
 app.get('/settings', (req, res) => {
-    res.send({mode:'SINGLE'});
+    res.send({mode:'Multaplayer '});
   });  
 
 app.listen(port, () => {
