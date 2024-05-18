@@ -1,4 +1,4 @@
-import { playAgain,getCachCount,getMissCount } from "../../data/data.js"
+import { playAgain,getCachCount,getMissCount } from "../../data/data.proxy.js"
 
 export function Lose(){
     const loseElement = document.createElement('div')

@@ -1,9 +1,9 @@
-import { getGridSize } from "../../data/data.js";
+import { getGridSize } from "../../data/data.proxy.js";
 import { Cell } from "./Cell/Cell.js";
 
-export function GridGame(){
+export async function GridGame(){
     const gridElement = document.createElement('table')
-    const gridSize = getGridSize()
+    const gridSize = await getGridSize()
 
     for (let y = 0; y < gridSize.y; y++) {
         const rowElement = document.createElement('tr')

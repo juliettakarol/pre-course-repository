@@ -1,11 +1,15 @@
-import { EVENTS, getCachCount, getMissCount, subcribe } from "../../data/data.js"
+import { EVENTS, getCachCount, getMissCount, subcribe } from "../../data/data.proxy.js"
 
 
 export function InfoPanel(){
 
-    function rerenderInfoPanel(){
+    async function rerenderInfoPanel(){
+        const catchCount = await getCachCount()
+        const missCount = await getMissCount()
+
+
         panelElement.innerHTML=''
-        panelElement.append(`Catch Player1: ${getCachCount().player1}, Player2: ${getCachCount().player2}, Miss: ${getMissCount()}`)
+        panelElement.append(`Catch Player1: ${catchCount.player1}, Player2: ${catchCount.player2}, Miss: ${missCount}`)
     }
 
     subcribe((e)=> {

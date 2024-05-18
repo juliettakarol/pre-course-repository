@@ -1,4 +1,4 @@
-import { validationPlayerNumber } from "../../../../data/data.js"
+import { validationPlayerNumber } from "../../../../data/data.proxy.js"
 
 
 export function Player(playerNumber){

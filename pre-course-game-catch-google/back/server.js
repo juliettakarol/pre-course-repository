@@ -1,19 +1,74 @@
 // app.js
 import express from 'express';
-import { StartGame, getHeroysGoogle, getState, getGridSize, getHeroysPlayer1, getHeroysPlayer2, getMissCount, getCachCount } from './data.js';
+import cors from 'cors';
+import { StartGame, getHeroysGoogle, getState, getGridSize, getHeroysPlayer1, getHeroysPlayer2, getMissCount, getCachCount, playAgain, movePlayer, setGridSize, subcribe, unsubcribe } from './data.js';
 
-
-//запускаем игру
-StartGame()
 
 
 const app = express();
+app.use(cors())
+app.use(express.json())
+
 const port = 3000;
 
-app.get('/', (req, res) => {
-  const coords = getHeroysGoogle()
-  res.send(coords);
-});
+
+app.put('/movePlayer', (req, res) => {
+  movePlayer(req.body.playerNumber, req.body.direction)
+  res.send(200);
+}); 
+
+
+app.put('/setGridSize', (req, res) => {
+  setGridSize(req.body.x, req.body.y)
+  res.send(200);
+});  
+
+app.put('/StartGame', (req, res) => {
+  StartGame()
+  res.send(200);
+});  
+
+app.put('/playAgain', (req, res) => {
+  playAgain()
+  res.send(200);
+});  
+
+
+app.get('/events', (req, res) => {
+
+  res.header('Content-Type', 'text/event-stream')
+  res.header('Cache-Control', 'no-cache')
+  res.header('Connection', 'kep-alive')
+
+
+  const handler = (event) => {
+    res.write(`data: ${JSON.stringify(event)}\n\n`)
+  }
+
+  subcribe(handler)
+  req.on('close', () => {
+        unsubcribe(handler)
+        res.end()
+      })
+  
+})
+
+// app.get('/events', (req, res) => {
+//   const sendEvent = ()=>{
+//     const data = new Date().toLocaleTimeString()
+//     res.write(`data: ${data}\n\n`)
+//   }
+
+//   sendEvent()
+//   const intervalId = setInterval(sendEvent, 1000)
+
+//   req.on('close'. () => {
+//     clearInterval(intervalId)
+//     res.end()
+//   })
+//   })
+
+
 
 
 app.get('/getHeroysGoogle', (req, res) => {
@@ -37,11 +92,11 @@ app.get('/getHeroysGoogle', (req, res) => {
   });  
 
   app.get('/getMissCount', (req, res) => {
-    res.send({value: getMissCount()});
+    res.send({value:getMissCount()});
   }); 
   
   app.get('/getCachCount', (req, res) => {
-    res.send({value: getCachCount()});
+    res.send(getCachCount());
   });  
 
    

@@ -1,4 +1,4 @@
-import { EVENTS, STATES, getHeroysGoogle, getHeroysPlayer1, getHeroysPlayer2, subcribe } from "../../../data/data.js";
+import { EVENTS, STATES, getHeroysGoogle, getHeroysPlayer1, getHeroysPlayer2, subcribe } from "../../../data/data.proxy.js";
 import { Google } from "./Google/google.js";
 import { Player } from "./Player/player.js";
 
@@ -15,16 +15,23 @@ export function Cell(x, y) {
         prevState: CELL_STATUS.EMPTY
     }
 
-    function rerenderCell() {
+    async function rerenderCell() {
+
+        const googleCoords = await getHeroysGoogle()
+        const player1Coords = await getHeroysPlayer1()
+        const player2Coords = await getHeroysPlayer2()
+
+
+
         console.log(x, y)
         ceilElement.innerHTML = ''
-        if (getHeroysGoogle().x === x && getHeroysGoogle().y === y) {
+        if (googleCoords.x === x && googleCoords.y === y) {
             ceilElement.append(Google());
             state.prevState = CELL_STATUS.GOOGLE
-        } else if (getHeroysPlayer1().x === x && getHeroysPlayer1().y === y) {
+        } else if (player1Coords.x === x && player1Coords.y === y) {
             ceilElement.append(Player(1));
             state.prevState = CELL_STATUS.PLAYER1
-        } else if (getHeroysPlayer2().x === x && getHeroysPlayer2().y === y) {
+        } else if (player2Coords.x === x && player2Coords.y === y) {
             ceilElement.append(Player(2));
             state.prevState = CELL_STATUS.PLAYER2
         } else {
@@ -32,12 +39,16 @@ export function Cell(x, y) {
         }
     }
 
-    subcribe((e) => {
+    subcribe(async (e) => {
+        const googleCoords = await getHeroysGoogle()
+        const player1Coords = await getHeroysPlayer1()
+        const player2Coords = await getHeroysPlayer2()
+
         const transitions = {
             [EVENTS.GOOGLE_JUMP]: {
                 [CELL_STATUS.GOOGLE]: rerenderCell,
                 [CELL_STATUS.EMPTY]: () => {
-                    if (getHeroysGoogle().x === x && getHeroysGoogle().y === y) {
+                    if (googleCoords.x === x && googleCoords.y === y) {
                         rerenderCell()
                     }
                 },
@@ -45,12 +56,12 @@ export function Cell(x, y) {
             [EVENTS.PLAYER1_MOVE]: {
                 [CELL_STATUS.PLAYER1]: rerenderCell,
                 [CELL_STATUS.GOOGLE]: () => {
-                    if (getHeroysPlayer1().x === x && getHeroysPlayer1().y === y) {
+                    if (player1Coords.x === x && player1Coords.y === y) {
                         rerenderCell()
                     }
                 },
                 [CELL_STATUS.EMPTY]: () => {
-                    if (getHeroysPlayer1().x === x && getHeroysPlayer1().y === y) {
+                    if (player1Coords.x === x && player1Coords.y === y) {
                         rerenderCell()
                     }
                 },
@@ -58,12 +69,12 @@ export function Cell(x, y) {
             [EVENTS.PLAYER2_MOVE]: {
                 [CELL_STATUS.PLAYER2]: rerenderCell,
                 [CELL_STATUS.GOOGLE]: () => {
-                    if (getHeroysPlayer2().x === x && getHeroysPlayer2().y === y) {
+                    if (player2Coords.x === x && player2Coords.y === y) {
                         rerenderCell()
                     }
                 },
                 [CELL_STATUS.EMPTY]: () => {
-                    if (getHeroysPlayer2().x === x && getHeroysPlayer2().y === y) {
+                    if (player2Coords.x === x && player2Coords.y === y) {
                         rerenderCell()
                     }
                 },

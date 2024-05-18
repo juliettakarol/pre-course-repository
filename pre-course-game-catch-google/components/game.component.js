@@ -1,6 +1,6 @@
 import{InfoPanel} from '../components/InfoPanel/infopanel.js'
 import{GridGame} from '../components/GridGame/gridgame.js'
-import {GAME_DIRECTION, STATES, getState, movePlayer} from '../data/data.js'
+import {GAME_DIRECTION, STATES, getState, movePlayer} from '../data/data.proxy.js'
 import { Settings } from '../components/Settings/settingscomponents.js'
 import { Win } from '../components/Win/wincomponents.js'
 import { Lose } from '../components/Lose/losecomponents.js'
@@ -41,13 +41,17 @@ document.addEventListener('keyup', (event)=>{
 
 
 
-export function Game()  {
+export async function Game()  {
     const element = document.createElement('div')
     
-    const gameState = getState()
+    const gameState = await getState()
+
+
 switch(gameState){
     case STATES.IN_PROGRESS:
-        element.append(InfoPanel(),GridGame()) ;
+
+        const gameGrid = await GridGame()
+        element.append(InfoPanel(), gameGrid) ;
         break;
     
     case STATES.SETTINS:

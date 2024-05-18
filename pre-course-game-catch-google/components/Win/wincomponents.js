@@ -1,4 +1,4 @@
-import { getCachCount, getMissCount, playAgain } from "../../data/data.js"
+import { getCachCount, getMissCount, playAgain } from "../../data/data.proxy.js"
 
 export function Win(){
     

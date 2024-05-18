@@ -1,4 +1,4 @@
-import { OPTIONS, StartGame, setGridSize, setPointsToLose, setPointsToWin } from "../../data/data.js"
+import { OPTIONS, StartGame, setGridSize, setPointsToLose, setPointsToWin } from "../../data/data.proxy.js"
 //import { Selector } from "./selector.js"
 
 export function Settings(){

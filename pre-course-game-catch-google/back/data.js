@@ -50,7 +50,7 @@ const _data = {
         },
         pointsToWin:10,
         pointsToLose:10,
-        jumpInterval: 4000
+        jumpInterval: 3000
     },
     caught: {
         player1: 0,
