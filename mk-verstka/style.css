@@ -19,14 +19,28 @@ header {
     background: #6C63FF;
 }
 
+.main {
+    padding: 100px 0;
+}
+
 h1 {
     color: rgba(47, 46, 65, 1);
     font-size: 44px;
     font-weight: 700;
     text-transform: uppercase;
+    margin-bottom: 70px;
 
 }
 
+.card {
+    width: 370px;
+    height: 552px;
+    border-radius: 5px;
+    border: 2px solid rgba(231, 231, 231, 1);
+    background-color: #FFF;
+    padding: 46px 20px;
+
+}
 
 footer {
     background: rgba(108, 99, 255, 1);
