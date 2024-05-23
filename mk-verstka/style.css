@@ -5,13 +5,13 @@
 }
 
 body {
+    color: rgba(47, 46, 65, 1);
     font-family: "Roboto", sans-serif;
     font-style: normal;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.2;
     letter-spacing: -0.32px;
-
 }
 
 header {
@@ -19,27 +19,57 @@ header {
     background: #6C63FF;
 }
 
+.login-btn {
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid #FFF;
+    background-color: transparent;
+    color: #FFFFFF;
+    
+    text-transform: uppercase;
+    }    
+
 .main {
     padding: 100px 0;
 }
 
 h1 {
-    color: rgba(47, 46, 65, 1);
     font-size: 44px;
     font-weight: 700;
     text-transform: uppercase;
     margin-bottom: 70px;
+    text-align: center;
 
 }
 
 .card {
     width: 370px;
-    height: 552px;
     border-radius: 5px;
     border: 2px solid rgba(231, 231, 231, 1);
     background-color: #FFF;
     padding: 46px 20px;
 
+}
+
+.card-tittle {
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -0.44px;
+    text-transform: uppercase;
+}
+
+.card-img {
+    margin: 40px 0 36px ;
+}
+
+.card-text {
+    line-height: 1.5;
+}
+
+.card-text span {
+    font-weight: 700;
 }
 
 footer {
@@ -48,36 +78,19 @@ footer {
 
 }
 
-.login-btn {
-width: 120px;
-height: 40px;
-border-radius: 5px;
-border: 2px solid #FFF;
-background-color: transparent;
+.nav-link {
+    color: rgba(255, 255, 255, 1);
+    text-transform: capitalize;
 
-color: #FFFFFF;
+}
 
-text-transform: uppercase;
+.nav-link img {
+    margin-right: 10px;
+}
+
+.menu-item {
+    padding: 9px 15px;
 }
 
 
 
-
-.roboto-regular {
-    font-family: "Roboto", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-  
-  .roboto-medium {
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-  }
-  
-  .roboto-bold {
-    font-family: "Roboto", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-  }
-  
