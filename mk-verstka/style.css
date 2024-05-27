@@ -28,6 +28,13 @@ header {
     background: #6C63FF;
 }
 
+ .header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+} 
+
 .login-btn {
     width: 120px;
     height: 40px;
@@ -52,12 +59,23 @@ h1 {
 
 }
 
+.cards-wrapper {
+display: flex;
+justify-content: space-between;
+gap: 15px;
+flex-wrap: wrap;
+}
+
 .card {
-    width: 370px;
+    width: 320px;
     border-radius: 5px;
     border: 2px solid rgba(231, 231, 231, 1);
     background-color: #FFF;
     padding: 46px 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
 }
 
@@ -89,17 +107,25 @@ footer {
 
 ul{
     list-style: none;
+}
 
+.menu-items {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 100px;
 }
 
 .nav-link {
     color: rgba(255, 255, 255, 1);
     text-transform: capitalize;
+    display: flex;
+    align-items: center;
 
 }
 
 .nav-link img {
     margin-right: 10px;
+    
 }
 
 .menu-item {
